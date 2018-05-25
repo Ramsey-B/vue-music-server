@@ -3,21 +3,20 @@ var Schema = mongoose.Schema
 var schemaName = 'Song'
 var ObjectId = Schema.Types.ObjectId
 
-var schema = new Schema({
+var song = new Schema({
   kind: {type: String, required: true},
   title: {type: String, required: true},
   albumArt: {type: String, required: true},
   artist: {type: String, required: true},
-  collection: {type: String, required: true},
   price: {type: String, required: true},
   preview: {type: String, required: true},
   trackUrl: {type: String, required: true},
   artistId: {type: String, required: true}
 })
 
-var listSchema = new Schema({
+var schema = new Schema({
   title: {type: String, required: true},
-  songs: [schema],
+  songs: [song],
   userId:{
     type: ObjectId,
     ref: "User",
@@ -25,4 +24,4 @@ var listSchema = new Schema({
   }
 })
 
-module.exports = mongoose.model(schemaName, listSchema)
+module.exports = mongoose.model(schemaName, schema)

@@ -1,7 +1,6 @@
 var mongoose = require('mongoose')
 var bcrypt = require('bcryptjs')
 var Schema = mongoose.Schema
-var songs = require('./song')
 var schemaName = 'User'
 const SALT = 12
 
@@ -29,6 +28,9 @@ schema.methods.validatePassword = function (password) {
   return bcrypt.compare(password, this.hash)
 }
 
+schema.statics.test = function(){
+  console.log("test")
+}
 
 
 module.exports = mongoose.model(schemaName, schema)

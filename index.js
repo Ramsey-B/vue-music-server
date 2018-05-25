@@ -13,21 +13,13 @@ app.use(bp.urlencoded({
   extended: true
 }))
 
+let auth = require('./auth/auth')
+app.use(auth.session)
+app.use(auth.router)
 
+var songs = require('./routes/playlists')
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+app.use(songs.router)
 
 app.get('*', (req, res, next) => {
   res.status(404).send({
