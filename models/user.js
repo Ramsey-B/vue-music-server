@@ -28,9 +28,9 @@ schema.methods.validatePassword = function (password) {
   return bcrypt.compare(password, this.password)
 }
 
-schema.statics.test = function(){
-  console.log("test")
-}
+// schema.statics.test = function(){
+//   console.log("test")
+// }
 
 
 module.exports = mongoose.model(schemaName, schema)
