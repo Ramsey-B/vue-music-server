@@ -17,6 +17,7 @@ var song = new Schema({
 var schema = new Schema({
   title: {type: String, required: true},
   songs: [song],
+  author: {type: String, required: true},
   userId:{
     type: ObjectId,
     ref: "User",

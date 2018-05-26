@@ -4,14 +4,15 @@ var Users = require('../models/user')
 let session = require('../auth/sessions')
 
 //get all users playlists
-router.get('/get-playlists', (req, res) => {
-  Users.findById(req.session.uid)
+router.post('/playlists', (req, res) => {
+  Users.findById(req.body._id)
     .then(user => {
+      console.log(user)
       if (!user) {
         res.status(401).send({ message: "Please Log in" })
       }
       Songs.find({
-        userId: user._id
+        author: user.email
       }).then(playlists => {
         res.status(200).send(playlists)
       })

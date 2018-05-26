@@ -69,7 +69,7 @@ router.get('/authenticate', (req, res) => {
     })
   }).catch(err => {
     return res.status(500).send({
-      error: err
+      error: 'an error occurred'
     })
   })
 })
