@@ -4,8 +4,8 @@ var Users = require('../models/user')
 let session = require('../auth/sessions')
 
 //get all users playlists
-router.post('/playlists', (req, res) => {
-  Users.findById(req.body._id)
+router.get('/playlists', (req, res) => {
+  Users.findById(req.session.uid)
     .then(user => {
       console.log(user)
       if (!user) {
@@ -24,13 +24,9 @@ router.post('/playlists', (req, res) => {
 
 //new playlist
 router.post('/playlist', (req, res) => {
-  Users.findOne({
-    _id: req.body.userId
-  })
+  Users.findById(req.session.uid)
     .then(user => {
-      if (user._id != req.body.userId) {
-        res.status(400).send({ message: "Permission not granted" })
-      }
+      req.body.userId = user.id
       Songs.create(req.body)
         .then(newList => {
           res.status(200).send(newList)
@@ -46,7 +42,7 @@ router.post('/playlist', (req, res) => {
 
 //add to playlist
 router.put('/playlist/:id', (req, res) => {
-  Users.findById(req.body._id)
+  Users.findById(req.session.uid)
     .then(user => {
       Songs.findByIdAndUpdate(req.params.id, req.body, {
         new: true
@@ -64,7 +60,7 @@ router.put('/playlist/:id', (req, res) => {
 })
 
 router.delete('/playlist/:id', (req, res) => {
-  Users.findById(req.body._id)
+  Users.findById(req.session.uid)
     .then(user => {
       Songs.findById(req.params.id)
         .then(list => {
