@@ -4,14 +4,13 @@ var schemaName = 'Song'
 var ObjectId = Schema.Types.ObjectId
 
 var song = new Schema({
-  kind: {type: String, required: true},
-  title: {type: String, required: true},
-  albumArt: {type: String, required: true},
-  artist: {type: String, required: true},
-  price: {type: String, required: true},
-  preview: {type: String, required: true},
+  trackName: {type: String, required: true},
+  artworkUrl100: {type: String, required: true},
+  artistName: {type: String, required: true},
+  trackPrice: {type: String, required: true},
+  previewUrl: {type: String, required: true},
   trackUrl: {type: String, required: true},
-  artistId: {type: String, required: true}
+  trackId: {type: String, required: true, unique: true}
 })
 
 var schema = new Schema({

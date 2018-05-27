@@ -7,12 +7,28 @@ let session = require('../auth/sessions')
 router.get('/playlists', (req, res) => {
   Users.findById(req.session.uid)
     .then(user => {
-      console.log(user)
       if (!user) {
         res.status(401).send({ message: "Please Log in" })
       }
       Songs.find({
-        author: user.email
+        userId: req.session.uid
+      }).then(playlists => {
+        res.status(200).send(playlists)
+      })
+    })
+    .catch(err => {
+      res.status(500).send({ message: "An Error occured" })
+    })
+})
+
+router.get('/playlist/:id', (req, res) => {
+  Users.findById(req.session.uid)
+    .then(user => {
+      if (!user) {
+        res.status(401).send({ message: "Please Log in" })
+      }
+      Songs.findOne({
+        _id: req.params.id
       }).then(playlists => {
         res.status(200).send(playlists)
       })
