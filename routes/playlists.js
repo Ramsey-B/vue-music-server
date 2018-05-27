@@ -24,7 +24,9 @@ router.post('/playlists', (req, res) => {
 
 //new playlist
 router.post('/playlist', (req, res) => {
-  Users.findById(req.session.uid)
+  Users.findOne({
+    _id: req.body.userId
+  })
     .then(user => {
       if (user._id != req.body.userId) {
         res.status(400).send({ message: "Permission not granted" })
@@ -44,7 +46,7 @@ router.post('/playlist', (req, res) => {
 
 //add to playlist
 router.put('/playlist/:id', (req, res) => {
-  Users.findById(req.session.uid)
+  Users.findById(req.body._id)
     .then(user => {
       Songs.findByIdAndUpdate(req.params.id, req.body, {
         new: true
@@ -62,7 +64,7 @@ router.put('/playlist/:id', (req, res) => {
 })
 
 router.delete('/playlist/:id', (req, res) => {
-  Users.findById(req.session.uid)
+  Users.findById(req.body._id)
     .then(user => {
       Songs.findById(req.params.id)
         .then(list => {
