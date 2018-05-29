@@ -39,7 +39,7 @@ router.get('/playlist/:id', (req, res) => {
 })
 
 //new playlist
-router.post('/playlist', (req, res) => {
+router.post('/new-playlist', (req, res) => {
   Users.findById(req.session.uid)
     .then(user => {
       req.body.userId = user.id

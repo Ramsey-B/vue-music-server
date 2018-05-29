@@ -10,7 +10,7 @@ var song = new Schema({
   trackPrice: {type: String, required: true},
   previewUrl: {type: String, required: true},
   trackUrl: {type: String, required: true},
-  trackId: {type: String, required: true, unique: true}
+  trackId: {type: String, required: true}
 })
 
 var schema = new Schema({
